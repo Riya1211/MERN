@@ -21,3 +21,19 @@ export type AllProductResponse = {
     success : boolean;
     products : Product[];
 }
+export type CategoriesResponse = {
+    success : boolean;
+    categories : string[];
+}
+export type SearchProductResponse = {
+    success : boolean;
+    products : Product[];
+    totalPage : number;
+}
+export type SearchProductRequest = {
+    price : number;
+    category : string;
+    search : string;
+    sort : string;
+    totalPage : number;
+}
