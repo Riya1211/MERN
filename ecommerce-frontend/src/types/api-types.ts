@@ -37,3 +37,21 @@ export type SearchProductRequest = {
     sort : string;
     totalPage : number;
 }
+export type NewProductRequest = {
+    id : string;
+    formData : FormData;
+}
+export type UpdateProductRequest = {
+    userId : string;
+    productId : string;
+    formData : FormData;
+}
+export type DeleteProductRequest = {
+    userId : string;
+    productId : string;
+}
+//this response is for managaing product on admin side
+export type ProductResponse = {
+    success : boolean;
+    product : Product;
+}

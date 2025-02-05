@@ -51,6 +51,7 @@
         @include square(calc(16.5rem - 3rem));
         object-fit: cover;
         margin: 1rem;
+        overflow: hidden;
     }
 
     span{
