@@ -4,8 +4,15 @@ import CartItemCard from "../components/CartItem";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { CartReducerInitialState } from "../types/reducer-types";
-import { addToCart, calculatePrice, removeCartItem } from "../redux/reducer/cartReducer";
+import {
+  addToCart,
+  calculatePrice,
+  discountAppplied,
+  removeCartItem,
+} from "../redux/reducer/cartReducer";
 import { CartItem } from "../types/types";
+import axios from "axios";
+import { server } from "../redux/store";
 
 // static
 // const cartItems = [
@@ -34,11 +41,11 @@ const Cart = () => {
   const [isValidCouponCode, setIsValidCouponCode] = useState<boolean>(false);
 
   const incrementHandler = (cartItem: CartItem) => {
-    if(cartItem.quantity >= cartItem.stock) return;
+    if (cartItem.quantity >= cartItem.stock) return;
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity + 1 }));
   };
   const decrementHandler = (cartItem: CartItem) => {
-    if(cartItem.quantity <= 1) return;
+    if (cartItem.quantity <= 1) return;
     dispatch(addToCart({ ...cartItem, quantity: cartItem.quantity - 1 }));
   };
   const removeHandler = (productId: string) => {
@@ -46,7 +53,22 @@ const Cart = () => {
   };
 
   useEffect(() => {
+    const {token, cancel} = axios.CancelToken.source()
     const timeOutId = setTimeout(() => {
+      axios
+        .get(`${server}/api/v1/payment/discount?coupon=${couponCode}`, {
+          cancelToken: token,
+        })
+        .then((res) => {
+          dispatch(discountAppplied(res.data.discount));
+          setIsValidCouponCode(true);
+          dispatch(calculatePrice());
+        })
+        .catch(() => {
+          dispatch(discountAppplied(0));
+          setIsValidCouponCode(false);
+          dispatch(calculatePrice());
+        });
       if (Math.random() > 0.5) setIsValidCouponCode(true);
       else setIsValidCouponCode(false);
     }, 1000);
@@ -54,14 +76,16 @@ const Cart = () => {
     return () => {
       clearTimeout(timeOutId);
       // If condition is true and we start typing it remain true until we stoped that and then decide wether it is true or not, so to resolve that we do this.
+      cancel();
+      // This will act like a abort. like if I type the coupon and stop writting then it will make an API request but then we start typing again the api will still be on call but we don't need that API call so to 'ABORT' that we do this. 
       setIsValidCouponCode(false);
     };
   }, [couponCode]);
 
   useEffect(() => {
     dispatch(calculatePrice());
-  }, [cartItems])
-  
+  }, [cartItems]);
+
   return (
     <div className="cart">
       <main>

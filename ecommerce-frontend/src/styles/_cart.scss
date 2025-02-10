@@ -44,6 +44,7 @@
         >span {
             margin-top: -1rem;
             @include flex(row, center, center, 5px);
+            flex-wrap: wrap;
             >code {
                 font-weight: 900;
                 align-self: flex-end;
