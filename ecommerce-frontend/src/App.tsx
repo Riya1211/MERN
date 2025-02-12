@@ -18,6 +18,7 @@ const Cart = lazy(() => import("./pages/Cart"));
 const Shipping = lazy(() => import("./pages/Shipping"));
 const Login = lazy(() => import("./pages/Login"));
 const Orders = lazy(() => import("./pages/Orders"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Admin Routes Importing
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
@@ -123,6 +124,9 @@ const App = () => {
               path="/admin/transaction/:id"
               element={<TransactionManagement />}
             />
+
+            {/* Route for Page 404*/}
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
