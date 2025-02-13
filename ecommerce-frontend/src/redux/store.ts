@@ -18,3 +18,5 @@ export const store = configureStore({
     },
     middleware: (mid) => [...mid(), userAPI.middleware, productAPI.middleware, orderAPI.middleware], //  [...mid(), userAPI.middleware] is used because we are concatinating the middldeware as they are of array type
 });
+
+export type RootState = ReturnType<typeof store.getState>;

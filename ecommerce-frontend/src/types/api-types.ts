@@ -12,6 +12,11 @@ export type MessageResponse = {
     message : string;
 }
 
+export type AllUsersResponse = {
+    success : boolean;
+    users : User[];
+}
+
 export type UserResponse = {
     success : boolean;
     user : User;
@@ -56,12 +61,22 @@ export type ProductResponse = {
     product : Product;
 }
 
+export type AllOrdersResponse = {
+    success : boolean;
+    orders : Order[];
+}
+export type OrderDetailResponse = {
+    success : boolean;
+    order : Order;
+}
+
 export type NewOrderRequest = {
     user: string;
     shippingInfo : ShippingInfo;
     orderItems: CartItem[];
     //given cartItem not orderItem because in orderItem there is the _id which will be created later and cartItem is quite similar to orderItem.
     subTotal: number;
+    shippingCharges: number;
     tax: number;
     discount: number;
     total: number;
@@ -72,11 +87,7 @@ export type UpdateOrderRequest = {
     orderId: string;
 }
 
-export type AllOrdersResponse = {
-    success : boolean;
-    orders : Order[];
-}
-export type OrderDetailResponse = {
-    success : boolean;
-    order : Order;
+export type DeleteUserRequest = {
+    userId: string;
+    adminUserId: string;
 }
