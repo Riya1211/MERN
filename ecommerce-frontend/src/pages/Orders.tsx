@@ -15,7 +15,7 @@ type DataType = {
   quantity: number;
   discount: number;
   status: ReactElement;
-  action: ReactElement;
+  // action: ReactElement;
 };
 
 const column: Column<DataType>[] = [
@@ -39,10 +39,10 @@ const column: Column<DataType>[] = [
     Header: "Status",
     accessor: "status",
   },
-  {
-    Header: "Action",
-    accessor: "action",
-  },
+  // {
+  //   Header: "Action",
+  //   accessor: "action",
+  // },
 ];
 const Orders = () => {
   const { user } = useSelector(
@@ -50,6 +50,7 @@ const Orders = () => {
   );
 
   const { data, isLoading, isError, error } = useMyOrdersQuery(user?._id!);
+  console.log(data);
 
   if (isError) {
     const err = error as CustomError;
@@ -81,7 +82,7 @@ const Orders = () => {
               {i.status}
             </span>
           ),
-          action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
+          // action: <Link to={`/admin/transaction/${i._id}`}>Manage</Link>,
         }))
       );
     }

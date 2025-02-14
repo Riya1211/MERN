@@ -9,7 +9,7 @@ import { myCache } from "../app.js";
 // Get My Orders
 export const myOrders = TryCatch(async (req, res, next) => {
   const { id: user } = req.query;
-  const key = ` `;
+  const key = `my-orders-${user}`;
   let orders = [];
 
   if (myCache.has(key)) {
