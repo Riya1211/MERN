@@ -109,6 +109,7 @@
       position: absolute;
       left: calc(100% - 100px);
       top: 8%;
+      z-index: 1;
       > div{
         @include flex(column, flex-start, center, 0.25rem);
       }
@@ -175,7 +176,7 @@
     th,
     td {
       padding: 8px;
-      text-align: left;
+      text-align: center;
       vertical-align: middle;
     }
   

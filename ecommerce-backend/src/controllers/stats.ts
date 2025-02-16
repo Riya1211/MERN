@@ -141,7 +141,7 @@ export const getDashboardStats = TryCatch(async (req, res, next) => {
         lastMonthProducts.length
       ),
       user: calculatePercentage(thisMonthUsers.length, lastMonthUsers.length),
-      oerder: calculatePercentage(
+      order: calculatePercentage(
         thisMonthOrders.length,
         lastMonthOrders.length
       ),
@@ -195,7 +195,7 @@ export const getDashboardStats = TryCatch(async (req, res, next) => {
       _id: i.id,
       discount: i.discount,
       amount: i.total,
-      qauntity: i.orderItems.length,
+      quantity: i.orderItems.length,
       status: i.status,
     }));
 

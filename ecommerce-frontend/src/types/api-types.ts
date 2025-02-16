@@ -1,4 +1,4 @@
-import { CartItem, Order, Product, ShippingInfo, User } from "./types";
+import { Bar, CartItem, Line, Order, Pie, Product, ShippingInfo, Stats, User } from "./types";
 
 export type CustomError ={
     status: number;
@@ -35,26 +35,7 @@ export type SearchProductResponse = {
     products : Product[];
     totalPage : number;
 }
-export type SearchProductRequest = {
-    price : number;
-    category : string;
-    search : string;
-    sort : string;
-    totalPage : number;
-}
-export type NewProductRequest = {
-    id : string;
-    formData : FormData;
-}
-export type UpdateProductRequest = {
-    userId : string;
-    productId : string;
-    formData : FormData;
-}
-export type DeleteProductRequest = {
-    userId : string;
-    productId : string;
-}
+
 //this response is for managaing product on admin side
 export type ProductResponse = {
     success : boolean;
@@ -65,9 +46,54 @@ export type AllOrdersResponse = {
     success : boolean;
     orders : Order[];
 }
+
 export type OrderDetailResponse = {
     success : boolean;
     order : Order;
+}
+
+export type StatsResponse = {
+    success : boolean;
+    stats : Stats;
+}
+
+export type PieResponse = {
+    success : boolean;
+    charts : Pie;
+}
+
+export type BarResponse = {
+    success : boolean;
+    charts : Bar;
+}
+
+export type LineResponse = {
+    success : boolean;
+    charts : Line;
+}
+
+export type SearchProductRequest = {
+    price : number;
+    category : string;
+    search : string;
+    sort : string;
+    totalPage : number;
+}
+
+export type NewProductRequest = {
+    id : string;
+    formData : FormData;
+}
+
+export type UpdateProductRequest = {
+    userId : string;
+    productId : string;
+    formData : FormData;
+}
+
+export type DeleteProductRequest = {
+    userId : string;
+    productId : string;
 }
 
 export type NewOrderRequest = {
